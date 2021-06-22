@@ -1,0 +1,118 @@
+USE pizza_now;
+
+CREATE TABLE `Category` (
+  `catId` int AUTO_INCREMENT NOT NULL PRIMARY KEY ,
+  `catName` varchar(50) NOT NULL
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `Category` (`catName`) 
+VALUES ('Pizza'), 
+	('Appetizer'),
+       ('Beverage'),
+       ('Dessert'),
+       ('Deals');
+
+CREATE TABLE `product_display` (
+  `id` int AUTO_INCREMENT NOT NULL PRIMARY KEY ,
+  `productName` varchar(50) NOT NULL,
+  `productPrice` INT(4) NOT NULL,
+  `productImage`varchar(100)NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `productType` varchar(20) NOT NULL,
+  `catId`  INT,
+    CONSTRAINT FK_id FOREIGN KEY (catId) REFERENCES Category(catId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `product_display` (`productName`, `productPrice`, `productImage`, `description`,`productType`,`catId`) 
+VALUES ('Devilled Chicken','0','/assets/images/Pizzas/Devilled Chicken full.jpg', 'Devilled chicken in spicy 
+sauce with a double layer of mozzarella cheese.', 'Pizza','1'),
+('Cheese Lovers','0','/assets/images/Pizzas/Cheese Lovers full.jpg', 'Rich tomato sauce with a triple layer of mozzarella cheese.', 'Pizza','1'),
+('Sausage Delight','0','/assets/images/Pizzas/Sausage Delight full.jpg', 'Chicken sausages & onions with a double layer of mozzarella cheese.', 'Pizza','1'),
+('Veggie Supreme','0','/assets/images/Pizzas/Veggie Supreme full.jpg', 'Mushrooms, tomatoes, onions, black olives and bell peppers with a double layer of 
+mozzarella cheese.', 'Pizza','1'),
+('Hot Garlic Prawns','0','/assets/images/Pizzas/Hot Garlic Prawns full.jpg', 'Spicy prawns, hot garlic sauce, onions, peppers and tomatoes with a double layer 
+of mozzarella cheese.', 'Pizza','1'),
+('Spicy Seafood','0','/assets/images/Pizzas/Spicy Seafood full.jpg', 'A fiery mix of prawns and cuttlefish, accompanied by bell peppers ,onions, layered mozzarella cheese.', 'Pizza','1'),
+('Potato Wedges','420','/assets/images/Appetizers/Potato Wedges.jpg', 'Our delicious wedges are wedges of potatoes, soft on the inside, crunchy on the outside!', 'Appetizer','2'),
+('Garlic Bread','300','/assets/images/Appetizers/Garlic Bread.jpg', 'Sliced & spread with garlic buttery goodness!Perfect snack to take delight in!', 'Appetizer','2'),
+('BBQ Wing It ','450','/assets/images/Appetizers/BBQ1.jpg', 'Succulent chicken wings tossed in our famous BBQ sauce & baked to perfection!', 'Appetizer','2'),
+('Chocolate Milk Shake','455','/assets/images/Beverages/ChocolateMikShake.png', 'Perfect your presentation and serve up this chilled drink topped with marshmallows, cream and a drizzle of chocolate spread!', 'Beverage','3'),
+('Coca-Cola','220','/assets/images/Beverages/CocaCola.png', 'CocaCola is a sweetened, carbonated soft drink flavored with vanilla, cinnamon, citrus oils , caffeineand other flavorings!', 'Beverage','3'),
+('Fanta ','300','/assets/images/Beverages/Fanta.png', 'Fanta is a soft drink, bright, bubbly and popular, Fanta Orange is a soft drink with a tingly, fruity taste, made with 2 percent juice!', 'Beverage','3'),
+('Sprite','300','/assets/images/Beverages/Sprite.png', 'Sprite is a lemon-lime flavored! soft drink with a crisp, clean taste that gives you the ultimate cut-through refreshment', 'Beverage','3'),
+('Chocolate Melt Lava Cake','300','/assets/images/Desserts/Chocolate Melt Lava Cake.jpg', 'Molten chocolate cake is a popular dessert that combines the elements of a chocolate cake and a soufflé!', 'Dessert','4'),
+('Caramel Pudding','120','/assets/images/Desserts/CaramelPudding.jpg', 'Custard dessert with a layer of clear caramel sauce, contrasted with a hard caramel layer on top!', 'Dessert','4'),
+('Ice Cream ','100','/assets/images/Desserts/Icecream.jpg', 'Ice cream is sweet,flavored with fruit, spices, or candy- the flavor often influences the color!', 'Dessert','4'),
+('Lunch Time','3800','/assets/images/Deals/LunchTime.jpg', 'Get 1 Large Pizzas & 3 Appetizers,1 coke for Lunch!', 'Deals','5'),
+('Family Fun','3000','/assets/images/Deals/FamilyFun.png', '1 Large pizza,1 Appetizer,4 lava cakes, 4cokes Fun!!', 'Deals','5'),
+('Children fun ','3500','/assets/images/Deals/ChildrenFun.png', '2 Pizzas, 1 Garlic bread, 2 Ice cream & 1 caramel Pudding!', 'Deals','5');
+
+CREATE TABLE `size_option` ( 
+`option_id` int(4) NOT NULL AUTO_INCREMENT, 
+`size_option_name` varchar(20) NOT NULL, 
+`price` INT(4) NOT NULL,
+ `id` INT,
+ PRIMARY KEY (`option_id`),
+ CONSTRAINT FK_id3 FOREIGN KEY (id) REFERENCES product_display(id) ) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `size_option` (`size_option_name`, `price`, `id`) 
+VALUES 
+('Personal','510','1'),
+('Personal','510','2'),
+('Personal','510','3'),
+('Personal','610','4'),
+('Personal','710','5'),
+('Personal','710','6'),
+('Medium','970','1'),
+('Medium','970','2'),
+('Medium','970','3'),
+('Medium','1165','4'),
+('Medium','2130','5'),
+('Medium','2130','6'),
+('Large','1760','1'),
+('Large','1760','2'),
+('Large','1760','3'),
+('Large','2130','4'),
+('Large','2620','5'),
+('Large','2620','6');
+
+CREATE TABLE `toppings` ( 
+`toppingId` int(4) NOT NULL AUTO_INCREMENT, 
+`toppingName` varchar(20) NOT NULL, 
+`toppingPrice` INT(4) NOT NULL,
+`toppingImage`varchar(100)NOT NULL,
+ `id` INT,
+ PRIMARY KEY (`toppingId`),
+ CONSTRAINT FK_id1 FOREIGN KEY (id) REFERENCES product_display(id) ) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `toppings` (`toppingName`, `toppingPrice`,`toppingImage`, `id`) VALUES 
+('Cheese','80','/assets/images/Toppings/Cheese.jpg','1'), 
+('Cheese','80','/assets/images/Toppings/Cheese.jpg','2'), 
+('Cheese','80','/assets/images/Toppings/Cheese.jpg','3'), 
+('Cheese','80','/assets/images/Toppings/Cheese.jpg','4'), 
+('Cheese','80','/assets/images/Toppings/Cheese.jpg','5'), 
+('Cheese','80','/assets/images/Toppings/Cheese.jpg','6'), 
+('Onion','40','/assets/images/Toppings/Cheese.jpg','1'), 
+('Onion','40','/assets/images/Toppings/Onions.jpg','2'), 
+('Onion','40','/assets/images/Toppings/Onions.jpg','3'), 
+('Onion','40','/assets/images/Toppings/Onions.jpg','4'), 
+('Onion','40','/assets/images/Toppings/Onions.jpg','5'), 
+('Onion','40','/assets/images/Toppings/Onions.jpg','6'), 
+('Olives','40','/assets/images/Toppings/Black Olives.jpeg','1'), 
+('Olives','40','/assets/images/Toppings/Black Olives.jpeg','2'), 
+('Olives','40','/assets/images/Toppings/Black Olives.jpeg','3'), 
+('Olives','40','/assets/images/Toppings/Black Olives.jpeg','4'), 
+('Olives','40','/assets/images/Toppings/Black Olives.jpeg','5'), 
+('Olives','40','/assets/images/Toppings/Black Olives.jpeg','6');
+
+CREATE TABLE IF NOT EXISTS `ci_sessions`(
+  `id` varchar(128) NOT NULL,
+  `ip_address` varchar (45) NOT NULL,
+  `timestamp` INT(10) unsigned DEFAULT 0 NOT NULL,
+  `data` blob NOT NULL,
+  KEY `ci_sessions_timestamp`(`timestamp`));
